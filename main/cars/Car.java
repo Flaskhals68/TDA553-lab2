@@ -1,5 +1,10 @@
-package main;
+package main.cars;
 import java.awt.*;
+import main.interfaces.*;
+
+import main.interfaces.Movable;
+import main.parts.BaseBody;
+import main.parts.BaseEngine;
 
 public abstract class Car implements Movable {
     private int nrDoors; // Number of doors on the car
@@ -9,15 +14,19 @@ public abstract class Car implements Movable {
     private String modelName; // The car model name
     private double x; // The x coordiante of the car
     private double y; // The y coordiante of the car
+    private BaseEngine engine;
+    private BaseBody body;
     private Direction direction; // The Enum Direction direction of the car (UP, DOWN, LEFT, RIGHT)
     
-    public Car(double x, double y, int nrDoors, double enginePower, Color color, String modelName) {
+    public Car(double x, double y, int nrDoors, double enginePower, Color color, String modelName, BaseEngine engine, BaseBody body) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
         this.x = x;
         this.y = y;
+        this.engine = engine;
+        this.body = body;
         this.direction = Direction.UP;
         stopEngine();
     }
@@ -29,9 +38,9 @@ public abstract class Car implements Movable {
         DOWN,
     }
     
-    protected abstract void incrementSpeed(double amount);
+    // protected abstract void incrementSpeed(double amount);
 
-    protected abstract void decrementSpeed(double amount);
+    // protected abstract void decrementSpeed(double amount);
 
     protected abstract double speedFactor();
 
@@ -147,5 +156,15 @@ public abstract class Car implements Movable {
                 setDirection(Direction.UP);
                 break;
         }
+    }
+
+    protected void incrementSpeed(double amount) {
+	    double currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
+        setCurrentSpeed(currentSpeed);
+    }
+
+    protected void decrementSpeed(double amount) {
+        double currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+        setCurrentSpeed(currentSpeed);
     }
 }

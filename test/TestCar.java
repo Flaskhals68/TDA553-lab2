@@ -5,9 +5,9 @@ import static org.junit.Assert.assertThrows;
 
 import org.junit.Test;
 
-import main.Car;
-import main.Saab95;
-import main.Volvo240;
+import main.cars.Car;
+import main.cars.Saab95;
+import main.cars.Volvo240;
 
 public class TestCar {
     @Test
