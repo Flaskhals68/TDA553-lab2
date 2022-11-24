@@ -1,6 +1,5 @@
 package main.cars;
 import java.awt.*;
-import main.interfaces.*;
 
 import main.interfaces.Movable;
 import main.parts.BaseBody;
@@ -18,7 +17,7 @@ public abstract class Car implements Movable {
     private BaseBody body;
     private Direction direction; // The Enum Direction direction of the car (UP, DOWN, LEFT, RIGHT)
     
-    public Car(double x, double y, int nrDoors, double enginePower, Color color, String modelName, BaseEngine engine, BaseBody body) {
+    public Car(double x, double y, int nrDoors, int enginePower, Color color, String modelName, BaseEngine engine, BaseBody body) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -42,7 +41,9 @@ public abstract class Car implements Movable {
 
     // protected abstract void decrementSpeed(double amount);
 
-    protected abstract double speedFactor();
+    protected double speedFactor() {
+        return engine.speedFactor() * body.speedFactor() * 0.01;
+    }
 
     public double getX(){
         return x;

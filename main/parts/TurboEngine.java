@@ -9,7 +9,7 @@ public class TurboEngine extends BaseEngine {
     }
 
     public double speedFactor() {
-        return (turboOn) ? turboFactor : 1;
+        return (turboOn) ? getEnginePower() * turboFactor : getEnginePower();
     }
 
     public void setTurboOn() {
