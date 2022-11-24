@@ -1,0 +1,42 @@
+Noah Andreasson, Erik Berglind, Kalle Johansson
+
+1. Explain how you chose the inheritance hierarchy in Task 1, making reference to the Open-Closed Principle.
+
+We chose to create an abstract class Car to contain all the base attributes and functionality of a car, 
+such as the number of doors. We then created the subclasses Volvo240 and Saab95 to contain the specifics
+of each model and override the methods for the incrementing of the car's speed (for example). 
+
+The Car class also implements an interface Movable, because a car may not be the only thing that can move.
+Movable contains the base signature of the required movement methods.
+
+By using abstract methods in the Car class, we require all subclasses to implement their own gas(), break(), etc. to minimize dependency 
+between the client and each subclass. This makes it easier to add another car without changing the original code, 
+according to the open closed principle.
+
+The same goes for the implementation of the interface movable.
+
+
+2. Explain how you implemented each of the sanity checks in Task 4.
+
+For gas() and break(), we chose to throw an Exception when a value outside the range of 0 < x < 1 was given.
+This solves the problem of being able to pass too large arguments, and also makes it impossible for gas() to result
+in a lower speed, and break() to resolve in a higher speed.
+
+The only method to directly change the car's speed is increment speed. By using the min() method, the car 
+will always choose the lowest of either the next speed increment and the cars enginePower. This means that 
+it is impossible for the car to ever go over the cars enginePower.
+
+The only method that reduced the car's speed is decrementSpeed(). By using the max() method the largest of the next speed decrement 
+and 0 is chosen. This makes it impossible for currentSpeed to get a negative value.
+
+
+####Aside####
+
+In some test methods, we chose to use multiple asserts. While this may not be the preferred way to test methods,
+it avoids having to write multiple nearly identical tests. For example, volvo_should_move_to_positive_coordinates() would have
+to be spitted into multiple turn tests. Each turn test would have to make multiple turns to be able to make the untested turn.
+In other words, each test method would have to repeat the previous test method.
+The end result would be an unnecessarily long test class that is bloated with a lot of methods that test nearly the exact same things.
+
+By instead limiting each method to only test a single functionality the tests keep their independency from each other
+and are still highly manageable for future work.
