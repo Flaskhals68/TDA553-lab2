@@ -2,12 +2,12 @@ package main.cars;
 
 import java.awt.Color;
 
-import main.interfaces.HasFlatBed;
+import main.interfaces.HasBed;
 import main.parts.DumpTruckBed;
 import main.parts.NormalBody;
 import main.parts.NormalEngine;
 
-public class ScaniaP340 extends Car implements HasFlatBed {
+public class ScaniaP340 extends Car implements HasBed {
     private static final int enginePower = 80;
     private static final int nrDoors = 2;
     private DumpTruckBed bed;
@@ -27,6 +27,10 @@ public class ScaniaP340 extends Car implements HasFlatBed {
         if (canMoveBed()) {
             bed.lower();
         }
+    }
+
+    public int getAngle(){
+        return bed.getAngle();
     }
 
     public boolean canMoveBed() {

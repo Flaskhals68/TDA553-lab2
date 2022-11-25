@@ -1,10 +1,11 @@
 package main.parts;
 
 public class DumpTruckBed extends BaseBed {
-    private int angle;
+    
     private static final int maxAngle = 70;
     private static final int minAngle = 0;
     private static final int angleSpeed = 10;
+    private int angle;
     
     public DumpTruckBed() {
         this.angle = minAngle;
@@ -15,7 +16,7 @@ public class DumpTruckBed extends BaseBed {
     }
 
     public void lower() {
-        setAngle(Math.min(getAngle() - angleSpeed, minAngle));
+        setAngle(Math.max(getAngle() - angleSpeed, minAngle));
     }
 
     public int getAngle() {

@@ -1,6 +1,6 @@
 package main.interfaces;
 
-public interface HasFlatBed {
+public interface HasBed {
     void raise();
     void lower();
     boolean canMoveBed();
