@@ -43,8 +43,8 @@ public class TransportBed extends BaseBed {
         }
     }
 
-    public Car unloadCar() {
-        if (isEmpty()) throw new UnloadingFromEmptyBedException e;
+    public Car unloadCar() throws UnloadingFromEmptyBedException{
+        if (isEmpty()) throw new UnloadingFromEmptyBedException();
         loadedCount--;
         Car unloadedCar = loadedCars[loadedCount];
         return unloadedCar;
@@ -54,5 +54,11 @@ public class TransportBed extends BaseBed {
         return loadedCount <= 0;
     }
 
-    public class UnloadingFromEmptyBedException extends Exception;
+    public class UnloadingFromEmptyBedException extends Exception {
+        public static final String message = "";
+
+        public UnloadingFromEmptyBedException() {
+            super(message);
+        }
+    }
 }
