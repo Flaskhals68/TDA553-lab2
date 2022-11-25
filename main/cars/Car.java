@@ -97,13 +97,14 @@ public abstract class Car implements Movable {
 	    currentSpeed = 0;
     }
     
+    /**
+        * Increase vehicle's speed if it is allowed to move
+     **/
     public void gas(double amount){
-        if (amount < 0 || amount > 1) throw new IllegalArgumentException();
         incrementSpeed(amount);
     }
 
     public void brake(double amount){
-        if (amount < 0 || amount > 1) throw new IllegalArgumentException();
         decrementSpeed(amount);
     }
 
@@ -160,11 +161,13 @@ public abstract class Car implements Movable {
     }
 
     private void incrementSpeed(double amount) {
+        if (amount < 0 || amount > 1) throw new IllegalArgumentException();
 	    double currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
         setCurrentSpeed(currentSpeed);
     }
 
     private void decrementSpeed(double amount) {
+        if (amount < 0 || amount > 1) throw new IllegalArgumentException();
         double currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
         setCurrentSpeed(currentSpeed);
     }

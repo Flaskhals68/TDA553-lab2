@@ -18,15 +18,25 @@ public class ScaniaP340 extends Car implements HasFlatBed {
     }
 
     public void raise() {
-        bed.raise();
+        if (canMoveBed()) {
+            bed.raise();
+        }
     }
 
     public void lower() {
-        bed.lower();
+        if (canMoveBed()) {
+            bed.lower();
+        }
     }
 
-    private boolean canLower() {
-        return bed.getAngle() > 0 && getCurrentSpeed() == 0;
+    public boolean canMoveBed() {
+        return getCurrentSpeed() == 0;
     }
 
+    @Override
+    public void gas(double amount) {
+        if (bed.getAngle() == 0) {
+            super.gas(amount);
+        }
+    }
 }
