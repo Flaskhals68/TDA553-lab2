@@ -1,8 +1,5 @@
 package main.parts;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import main.cars.Car;
 
 public class TransportBed extends BaseBed {
@@ -10,7 +7,7 @@ public class TransportBed extends BaseBed {
     private boolean bedExtended = false;
     private static final int loadCapacity = 9;
     private Car[] loadedCars = new Car[loadCapacity];
-    private int loadedCount = 0;
+    private int loadCount = 0;
     
     public TransportBed() {
         // this.bedExtended = false;
@@ -29,7 +26,7 @@ public class TransportBed extends BaseBed {
     }
 
     private boolean canLoad() {
-        return loadedCount < loadCapacity;
+        return loadCount < loadCapacity;
     }
 
     /**
@@ -38,24 +35,44 @@ public class TransportBed extends BaseBed {
      */
     public void loadCar(Car car) {
         if (canLoad()) {
-            loadedCars[loadedCount] = car;
-            loadedCount++;
+            loadedCars[loadCount] = car;
+            loadCount++;
+            // TODO chose where loaded car should end up
         }
     }
 
-    public Car unloadCar() throws UnloadingFromEmptyBedException{
+    /**
+     * Unload and return the last car to be loaded
+     * @return Car
+     * @throws UnloadingFromEmptyBedException
+     */
+    public Car unloadCar() throws UnloadingFromEmptyBedException {
         if (isEmpty()) throw new UnloadingFromEmptyBedException();
-        loadedCount--;
-        Car unloadedCar = loadedCars[loadedCount];
+        loadCount--;
+        Car unloadedCar = loadedCars[loadCount];
+        loadedCars[loadCount] = null;
         return unloadedCar;
     }
 
+    /**
+     * Unload all cars stored on the transporter bed
+     * @return Car[] of all loaded cars
+     * @throws UnloadingFromEmptyBedException
+     */
+    public Car[] unloadAll() throws UnloadingFromEmptyBedException {
+        Car[] unloadedCars = new Car[loadCount];
+        for (int i = loadCount-1; i > 0; i--) {
+            unloadedCars[i] = unloadCar();
+        }
+        return unloadedCars;
+    }
+
     private boolean isEmpty() {
-        return loadedCount <= 0;
+        return loadCount <= 0;
     }
 
     public class UnloadingFromEmptyBedException extends Exception {
-        public static final String message = "";
+        public static final String message = "Unable to unload from empty bed";
 
         public UnloadingFromEmptyBedException() {
             super(message);

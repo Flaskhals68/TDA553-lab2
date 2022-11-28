@@ -8,7 +8,7 @@ import main.parts.NormalEngine;
 import main.parts.TransportBed;
 
 public class Transporter extends Car implements HasBed {
-    private boolean lowered = false;
+    private static final double loadDist = 10;
     private TransportBed bed = new TransportBed();
 
     public Transporter(double x, double y) {
@@ -26,5 +26,16 @@ public class Transporter extends Car implements HasBed {
 
     public void lower() {
         bed.lower();
+    }
+
+    public void loadCar(Car car) {
+        if (bed.getBedExtended() == true && distToCar(car) <= loadDist)
+            bed.loadCar(car);
+    }
+
+    private double distToCar(Car car) {
+        double dx = this.getX() - car.getX();
+        double dy = this.getY() - car.getY();
+        return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
     }
 }
