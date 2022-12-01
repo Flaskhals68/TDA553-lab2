@@ -1,6 +1,6 @@
 package main.parts;
 
-public class DumpTruckBed extends BaseBed {
+public class DumpTruckBed implements BaseBed {
     
     private static final int maxAngle = 70;
     private static final int minAngle = 0;

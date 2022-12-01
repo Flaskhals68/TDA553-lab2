@@ -4,26 +4,25 @@ import java.awt.*;
 import main.interfaces.Movable;
 import main.parts.BaseBody;
 import main.parts.BaseEngine;
+import main.interfaces.Positionable;
 
-public abstract class Car implements Movable {
+public abstract class Car implements Movable, Positionable {
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    private double x; // The x coordiante of the car
-    private double y; // The y coordiante of the car
+    private Point point;
     private BaseEngine engine;
     private BaseBody body;
     private Direction direction; // The Enum Direction direction of the car (UP, DOWN, LEFT, RIGHT)
     
-    public Car(double x, double y, int nrDoors, int enginePower, Color color, String modelName, BaseEngine engine, BaseBody body) {
+    public Car(Point point, int nrDoors, int enginePower, Color color, String modelName, BaseEngine engine, BaseBody body) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-        this.x = x;
-        this.y = y;
+        this.point = point;
         this.engine = engine;
         this.body = body;
         this.direction = Direction.UP;
@@ -51,6 +50,14 @@ public abstract class Car implements Movable {
 
     public double getY(){
         return y;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     public int getNrDoors(){
@@ -112,16 +119,16 @@ public abstract class Car implements Movable {
         double speed = getCurrentSpeed();
         switch (direction) {
             case UP:
-                y += speed;
+                point.y += speed;
                 break;
             case RIGHT:
-                x += speed;
+                point.x += speed;
                 break;
             case DOWN:
-                y -= speed;
+                point.y -= speed;
                 break;
             case LEFT:
-                x -= speed;
+                point.x -= speed;
                 break;
         }
     }
@@ -170,5 +177,11 @@ public abstract class Car implements Movable {
         if (amount < 0 || amount > 1) throw new IllegalArgumentException();
         double currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
         setCurrentSpeed(currentSpeed);
+    }
+
+    public double distToOther(Car other) {
+        double dx = getX() - other.getX();
+        double dy = getY() - other.getY();
+        return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
     }
 }
