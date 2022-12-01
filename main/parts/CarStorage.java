@@ -1,8 +1,9 @@
 package main.parts;
 import main.cars.Car;
+import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
 
-public abstract class CarStorage {
+public abstract class CarStorage implements HasCarStorage{
     
     private Positionable owner;
     private int loadRange;
@@ -17,7 +18,7 @@ public abstract class CarStorage {
         this.loadedCars = new Car[this.capacity];
     }
 
-    public void load(Car car) throws LoadingToFullBedException, TargetOutsideLoadingRangeException {
+    public void loadCar(Car car) throws LoadingToFullBedException, TargetOutsideLoadingRangeException {
         if (loadedCount >= capacity) throw new LoadingToFullBedException();
         else if (!carInRange(car)) throw new TargetOutsideLoadingRangeException();
         loadedCars[++loadedCount] = car;
@@ -29,36 +30,13 @@ public abstract class CarStorage {
 
     public Car unloadCar() throws UnloadingFromEmptyBedException{
         if (isEmpty()) throw new UnloadingFromEmptyBedException();
-        loadedCount--;
-        Car unloadedCar = loadedCars[loadedCount];
-        return unloadedCar;
+        Car car = loadedCars[--loadedCount];
+        car.setX(owner.getX());
+        car.setY(owner.getY() + loadRange);
+        return car;
     }
 
     private boolean isEmpty() {
         return loadedCount <= 0;
-    }
-
-    public class LoadingToFullBedException extends Exception {
-        public static final String message = "";
-
-        public LoadingToFullBedException() {
-            super(message);
-        }
-    }
-
-    public class UnloadingFromEmptyBedException extends Exception {
-        public static final String message = "";
-
-        public UnloadingFromEmptyBedException() {
-            super(message);
-        }
-    }
-
-    public class TargetOutsideLoadingRangeException extends Exception {
-        public static final String message = "No car in load range was found";
-
-        public TargetOutsideLoadingRangeException() {
-            super(message);
-        }
     }
 }

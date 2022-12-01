@@ -63,7 +63,7 @@ public abstract class Car implements Movable, Positionable {
     }
 
     public Point2D.Double getPoint(){
-        
+        return point;
     }
 
     public int getNrDoors(){

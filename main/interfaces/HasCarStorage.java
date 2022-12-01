@@ -2,7 +2,7 @@ package main.interfaces;
 
 import main.cars.Car;
 
-public interface CanStoreCars {
+public interface HasCarStorage {
     void load(Car car);
     Car unload();
 }
