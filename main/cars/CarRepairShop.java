@@ -28,7 +28,7 @@ public class CarRepairShop implements Positionable, CanStoreCars {
 
     public void load(Car car) {
         if (loadedCount >= capacity) throw new LoadingToFullBedException();
-        else if (distanceToOther(car) > 10) throw new CarTooFarAwayException();
+        else if (distanceToOther(car) > 10) throw new TargetOutsideLoadingRangeException();
         loadedCars[++loadedCount] = car;
     }
 

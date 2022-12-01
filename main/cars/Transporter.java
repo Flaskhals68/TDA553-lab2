@@ -34,7 +34,7 @@ public class Transporter extends Car implements HasBed {
         }
     }
 
-    public void loadCar(Car car) throws TransportBed.LoadingToFullBedException, TransportBed.LoadingWhileMovingException, NoCarInLoadRange {
+    public void loadCar(Car car) throws TransportBed.LoadingToFullBedException, TransportBed.LoadingWhileMovingException, TargetOutsideLoadingRangeException {
         bed.loadCar(car);
     }
 

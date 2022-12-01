@@ -4,4 +4,6 @@ import java.awt.geom.Point2D;
 public interface Positionable {
     public double distanceToOther(Positionable other);
     public Point2D.Double getPoint();
+    public double getX();
+    public double getY();
 }

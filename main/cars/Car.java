@@ -1,5 +1,7 @@
 package main.cars;
-import java.awt.*;
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
+import java.awt.Color;
 
 import main.interfaces.Movable;
 import main.parts.BaseBody;
@@ -12,12 +14,12 @@ public abstract class Car implements Movable, Positionable {
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    private Point point;
+    private Point2D.Double point;
     private BaseEngine engine;
     private BaseBody body;
     private Direction direction; // The Enum Direction direction of the car (UP, DOWN, LEFT, RIGHT)
     
-    public Car(Point point, int nrDoors, int enginePower, Color color, String modelName, BaseEngine engine, BaseBody body) {
+    public Car(Point2D.Double point, int nrDoors, int enginePower, Color color, String modelName, BaseEngine engine, BaseBody body) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -45,19 +47,23 @@ public abstract class Car implements Movable, Positionable {
     }
 
     public double getX(){
-        return x;
+        return point.x;
     }
 
     public double getY(){
-        return y;
+        return point.y;
     }
 
     public void setX(double x) {
-        this.x = x;
+        point.x = x;
     }
 
     public void setY(double y) {
-        this.y = y;
+        point.y = y;
+    }
+
+    public Point2D.Double getPoint(){
+        
     }
 
     public int getNrDoors(){

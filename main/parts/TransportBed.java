@@ -37,14 +37,14 @@ public class TransportBed implements BaseBed {
     /**
      * Load car if load capacity is not exceeded
      * @param car
-     * @throws NoCarInLoadRange
+     * @throws TargetOutsideLoadingRangeException
      * @throws LoadingToFullBedException
      * @throws LoadingWhileMovingException
      */
-    public void loadCar(Car car) throws LoadingToFullBedException, LoadingWhileMovingException, NoCarInLoadRange {
+    public void loadCar(Car car) throws LoadingToFullBedException, LoadingWhileMovingException, TargetOutsideLoadingRangeException {
         if (!getBedExtended()) throw new LoadingWhileMovingException();
         else if (!canLoad()) throw new LoadingToFullBedException();
-        else if (!inLoadRange(car)) throw new NoCarInLoadRange();
+        else if (!inLoadRange(car)) throw new TargetOutsideLoadingRangeException();
         loadedCars[loadedCount] = car;
         loadedCount++;
     }
