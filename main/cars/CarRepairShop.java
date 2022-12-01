@@ -4,7 +4,6 @@ import java.awt.geom.Point2D;
 import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
 import main.parts.CarStorageStationary;
-import main.parts.CarStorage.TargetOutsideLoadingRangeException;
 import main.exceptions.Exceptions.*;
 
 public class CarRepairShop implements Positionable, HasCarStorage {
@@ -32,11 +31,12 @@ public class CarRepairShop implements Positionable, HasCarStorage {
         carStorage.loadCar(car);
     }
 
-    public Car unload() {
-        Car car = loadedCars[--loadedCount];
-        car.setX(getX());
-        car.setY(getY() + loadRange);
-        return car;
+    public Car unloadCar() throws UnloadingFromEmptyBedException{
+        return carStorage.unloadCar();
+    }
+
+    public Car unloadCar(int index) {
+        return carStorage.unloadCar(index);
     }
 
     public Point2D.Double getPoint(){

@@ -18,17 +18,17 @@ public abstract class CarStorage implements HasCarStorage{
         this.loadedCars = new Car[this.capacity];
     }
 
+    public boolean carInRange(Car car){
+        return owner.getPoint().distance(car.getPoint()) <= loadRange;
+    }
+
     public void loadCar(Car car) throws LoadingToFullBedException, TargetOutsideLoadingRangeException {
         if (loadedCount >= capacity) throw new LoadingToFullBedException();
         else if (!carInRange(car)) throw new TargetOutsideLoadingRangeException();
         loadedCars[++loadedCount] = car;
     }
 
-    public boolean carInRange(Car car){
-        return owner.getPoint().distance(car.getPoint()) <= loadRange;
-    }
-
-    public Car unloadCar() throws UnloadingFromEmptyBedException{
+    public Car unloadCar() throws UnloadingFromEmptyBedException {
         if (isEmpty()) throw new UnloadingFromEmptyBedException();
         Car car = loadedCars[--loadedCount];
         car.setX(owner.getX());
