@@ -1,9 +1,10 @@
 package main.interfaces;
-import java.awt.geom.Point2D;
+
+import main.misc.DPoint;
 
 public interface Positionable {
     public double distanceToOther(Positionable other);
-    public Point2D.Double getPoint();
+    public DPoint getPoint();
     public double getX();
     public double getY();
 }

@@ -1,7 +1,6 @@
 package main.cars;
 
 import java.awt.Color;
-import java.awt.geom.Point2D;
 
 import main.interfaces.HasBed;
 import main.interfaces.HasCarStorage;
@@ -13,7 +12,7 @@ public class Transporter extends Car implements HasBed, HasCarStorage {
     private TransportBed bed;
 
     public Transporter(double x, double y) {
-        super(new Point2D.Double(x, y), 80, 2, Color.white, "Transporter", new NormalEngine(80), new NormalBody());
+        super(x, y, 80, 2, Color.white, "Transporter", new NormalEngine(80), new NormalBody());
         bed = new TransportBed(this);
     }
 

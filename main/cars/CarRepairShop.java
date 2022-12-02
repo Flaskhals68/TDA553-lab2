@@ -1,16 +1,16 @@
 package main.cars;
-import java.awt.geom.Point2D;
 
 import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
+import main.misc.DPoint;
 import main.parts.CarStorageStationary;
 
 public class CarRepairShop implements Positionable, HasCarStorage {
     private static final int loadRange = 10;
-    private Point2D.Double point;
+    private DPoint point;
     private CarStorageStationary carStorage;
 
-    public CarRepairShop(Point2D.Double point, int capacity) {
+    public CarRepairShop(DPoint point, int capacity) {
         this.point = point;
         this.carStorage = new CarStorageStationary(capacity, loadRange, this);
     }
@@ -35,7 +35,7 @@ public class CarRepairShop implements Positionable, HasCarStorage {
         return carStorage.unloadCar(index);
     }
 
-    public Point2D.Double getPoint(){
+    public DPoint getPoint() {
         return point;
     }
 

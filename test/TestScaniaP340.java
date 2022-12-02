@@ -10,7 +10,7 @@ import main.cars.Car;
 
 import main.cars.ScaniaP340;
 
-public class TestScania {
+public class TestScaniaP340 {
 
     @Test
     public void scania_can_raise_if_standing_still(){

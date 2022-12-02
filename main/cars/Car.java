@@ -1,11 +1,11 @@
 package main.cars;
-import java.awt.geom.Point2D;
 import java.awt.Color;
 
 import main.interfaces.Movable;
 import main.parts.BaseBody;
 import main.parts.BaseEngine;
 import main.interfaces.Positionable;
+import main.misc.DPoint;
 
 public abstract class Car implements Movable, Positionable {
     private int nrDoors; // Number of doors on the car
@@ -13,23 +13,23 @@ public abstract class Car implements Movable, Positionable {
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    private Point2D.Double point;
+    private DPoint point;
     private BaseEngine engine;
     private BaseBody body;
     private Direction direction; // The Enum Direction direction of the car (UP, DOWN, LEFT, RIGHT)
     
-    public Car(Point2D.Double point, int nrDoors, int enginePower, Color color, String modelName, BaseEngine engine, BaseBody body) {
+    public Car(double x, double y, int nrDoors, int enginePower, Color color, String modelName, BaseEngine engine, BaseBody body) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-        this.point = point;
+        this.point = new DPoint(x, y);
         this.engine = engine;
         this.body = body;
         this.direction = Direction.UP;
         stopEngine();
     }
-    
+
     public enum Direction {
         UP,
         LEFT,
@@ -61,11 +61,11 @@ public abstract class Car implements Movable, Positionable {
         point.y = y;
     }
 
-    public Point2D.Double getPoint(){
+    public DPoint getPoint(){
         return point;
     }
 
-    public void setPoint(Point2D.Double point){
+    public void setPoint(DPoint point){
         this.point = point;
     }
 
@@ -105,11 +105,11 @@ public abstract class Car implements Movable, Positionable {
         direction = newDirection;
     }
 
-    public void startEngine(){
+    public void startEngine() {
 	    currentSpeed = 0.1;
     }
 
-    public void stopEngine(){
+    public void stopEngine() {
 	    currentSpeed = 0;
     }
     

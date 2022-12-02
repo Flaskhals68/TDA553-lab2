@@ -1,10 +1,9 @@
 package main.parts;
 
-import java.awt.geom.Point2D.Double;
-
 import main.cars.Car;
 import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
+import main.misc.DPoint;
 
 public class TransportBed implements BaseBed, Positionable, HasCarStorage{
     
@@ -60,7 +59,7 @@ public class TransportBed implements BaseBed, Positionable, HasCarStorage{
         return owner.distanceToOther(other);
     }
 
-    public Double getPoint() {
+    public DPoint getPoint() {
         return owner.getPoint();
     }
 

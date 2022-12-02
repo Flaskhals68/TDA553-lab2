@@ -3,6 +3,7 @@ import java.awt.geom.Point2D;
 import main.cars.Car;
 import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
+import main.misc.DPoint;
 
 public abstract class CarStorage implements HasCarStorage, Positionable{
     
@@ -45,7 +46,7 @@ public abstract class CarStorage implements HasCarStorage, Positionable{
         return owner.distanceToOther(other);
     }
 
-    public Point2D.Double getPoint(){
+    public DPoint getPoint() {
         return owner.getPoint();
     }
 

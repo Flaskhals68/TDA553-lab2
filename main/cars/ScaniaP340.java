@@ -1,7 +1,6 @@
 package main.cars;
 
 import java.awt.Color;
-import java.awt.geom.Point2D;
 
 import main.interfaces.HasBed;
 import main.parts.DumpTruckBed;
@@ -13,8 +12,8 @@ public class ScaniaP340 extends Car implements HasBed {
     private static final int nrDoors = 2;
     private DumpTruckBed bed;
 
-    public ScaniaP340(Point2D.Double point) {
-        super(point, enginePower, nrDoors, Color.black, "ScaniaP340", new NormalEngine(enginePower), new NormalBody());
+    public ScaniaP340(double x, double y) {
+        super(x, y, enginePower, nrDoors, Color.black, "ScaniaP340", new NormalEngine(enginePower), new NormalBody());
         this.bed = new DumpTruckBed();
     }
 
