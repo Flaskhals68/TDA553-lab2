@@ -4,13 +4,9 @@ import java.awt.geom.Point2D;
 import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
 import main.parts.CarStorageStationary;
-import main.exceptions.Exceptions.*;
 
 public class CarRepairShop implements Positionable, HasCarStorage {
     private static final int loadRange = 10;
-    private int loadedCount = 0;
-    private Car[] loadedCars;
-    private int capacity;
     private Point2D.Double point;
     private CarStorageStationary carStorage;
 

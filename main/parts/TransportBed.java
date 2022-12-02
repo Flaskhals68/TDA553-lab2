@@ -1,21 +1,22 @@
 package main.parts;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.geom.Point2D.Double;
 
 import main.cars.Car;
+import main.interfaces.HasCarStorage;
+import main.interfaces.Positionable;
 
-public class TransportBed implements BaseBed {
+public class TransportBed implements BaseBed, Positionable, HasCarStorage{
     
     private boolean bedExtended = false;
     private static final int loadCapacity = 9;
-    private final Car[] loadedCars = new Car[loadCapacity];
-    private int loadedCount = 0;
     private static final int loadRange = 10;
     private Car owner;
+    private CarStorageMobile carStorage;
     
     public TransportBed(Car owner) {
         this.owner = owner;
+        this.carStorage = new CarStorageMobile(loadCapacity, loadRange, this);
     }
 
     public void raise() {
@@ -30,53 +31,48 @@ public class TransportBed implements BaseBed {
         return bedExtended;
     }
 
-    private boolean canLoad() {
-        return loadedCount < loadCapacity;
-    }
-
     /**
      * Load car if load capacity is not exceeded
      * @param car
      * @throws TargetOutsideLoadingRangeException
      * @throws LoadingToFullBedException
-     * @throws LoadingWhileMovingException
+     * @throws RampNotExtendedException
      */
-    public void loadCar(Car car) throws LoadingToFullBedException, LoadingWhileMovingException, TargetOutsideLoadingRangeException {
-        if (!getBedExtended()) throw new LoadingWhileMovingException();
-        else if (!canLoad()) throw new LoadingToFullBedException();
-        else if (!inLoadRange(car)) throw new TargetOutsideLoadingRangeException();
-        loadedCars[loadedCount] = car;
-        loadedCount++;
+    public void loadCar(Car car) throws LoadingToFullBedException, RampNotExtendedException, TargetOutsideLoadingRangeException {
+        if (!getBedExtended()) throw new RampNotExtendedException();
+        //else if (!canLoad()) throw new LoadingToFullBedException();
+        //else if (!inLoadRange(car)) throw new TargetOutsideLoadingRangeException();
+        //loadedCars[loadedCount] = car;
+        //loadedCount++;
+        carStorage.loadCar(car);
     }
 
-    public Car unloadCar() throws UnloadingFromEmptyBedException, LoadingWhileMovingException{
-        if (!getBedExtended()) throw new LoadingWhileMovingException();
-        if (isEmpty()) throw new UnloadingFromEmptyBedException();
-        loadedCount--;
-        Car unloadedCar = loadedCars[loadedCount];
-        return unloadedCar;
+    public Car unloadCar() throws UnloadingFromEmptyBedException, RampNotExtendedException{
+        if (!getBedExtended()) throw new RampNotExtendedException();
+        //if (isEmpty()) throw new UnloadingFromEmptyBedException();
+        //loadedCount--;
+        //Car unloadedCar = loadedCars[loadedCount];
+        //return unloadedCar;
+        return carStorage.unloadCar();
     }
 
-    private boolean isEmpty() {
-        return loadedCount <= 0;
+    public double distanceToOther(Positionable other){
+        return owner.distanceToOther(other);
     }
 
-    private boolean inLoadRange(Car car) {
-        return owner.distToOther(car) <= loadRange;
+    public Double getPoint() {
+        return owner.getPoint();
     }
 
-    public class LoadingWhileMovingException extends Exception {
-        public static final String message = "";
+    public double getX() {
+        return owner.getX();
+    }
 
-        public LoadingWhileMovingException() {
-            super(message);
-        }
+    public double getY(){
+        return owner.getY();
     }
 
     public void moveLoaded() {
-        for (Car car : loadedCars) {
-            car.setX(owner.getX());
-            car.setY(owner.getY());
-        }
+        carStorage.moveLoaded();
     }
 }

@@ -3,8 +3,8 @@ package main.interfaces;
 import main.cars.Car;
 
 public interface HasCarStorage {
-    void loadCar(Car car) throws LoadingToFullBedException, TargetOutsideLoadingRangeException;
-    Car unloadCar() throws UnloadingFromEmptyBedException;
+    void loadCar(Car car) throws LoadingToFullBedException, TargetOutsideLoadingRangeException, RampNotExtendedException;
+    Car unloadCar() throws UnloadingFromEmptyBedException, RampNotExtendedException;
 
     public class LoadingToFullBedException extends Exception {
         public static final String message = "";
@@ -26,6 +26,14 @@ public interface HasCarStorage {
         public static final String message = "No car in load range was found";
 
         public TargetOutsideLoadingRangeException() {
+            super(message);
+        }
+    }
+
+    public class RampNotExtendedException extends Exception {
+        public static final String message = "";
+
+        public RampNotExtendedException() {
             super(message);
         }
     }

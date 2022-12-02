@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 
 import main.interfaces.HasBed;
+import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
 import main.parts.NormalBody;
 import main.parts.NormalEngine;
 import main.parts.TransportBed;
-import main.parts.TransportBed.NoCarInLoadRange;
 
-public class Transporter extends Car implements HasBed {
+public class Transporter extends Car implements HasBed, HasCarStorage {
     private TransportBed bed;
 
     public Transporter(double x, double y) {
@@ -34,11 +34,11 @@ public class Transporter extends Car implements HasBed {
         }
     }
 
-    public void loadCar(Car car) throws TransportBed.LoadingToFullBedException, TransportBed.LoadingWhileMovingException, TargetOutsideLoadingRangeException {
+    public void loadCar(Car car) throws TransportBed.LoadingToFullBedException, TransportBed.RampNotExtendedException, TargetOutsideLoadingRangeException {
         bed.loadCar(car);
     }
 
-    public Car unloadCar() throws TransportBed.UnloadingFromEmptyBedException, TransportBed.LoadingWhileMovingException{
+    public Car unloadCar() throws TransportBed.UnloadingFromEmptyBedException, TransportBed.RampNotExtendedException{
         return bed.unloadCar();
     }
 

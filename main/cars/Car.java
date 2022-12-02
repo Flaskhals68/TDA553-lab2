@@ -1,6 +1,5 @@
 package main.cars;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 import java.awt.Color;
 
 import main.interfaces.Movable;
@@ -189,7 +188,7 @@ public abstract class Car implements Movable, Positionable {
         setCurrentSpeed(currentSpeed);
     }
 
-    public double distToOther(Car other) {
+    public double distanceToOther(Positionable other) {
         double dx = getX() - other.getX();
         double dy = getY() - other.getY();
         return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
