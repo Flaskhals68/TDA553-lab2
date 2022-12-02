@@ -78,4 +78,33 @@ public class TestTransporter {
                 transporter.unloadCar();
             });
     }
+
+    @Test
+    public void unloaded_car_should_land_reasonably_close() throws UnloadingFromEmptyStorageException, RampNotExtendedException, LoadingToFullStorageException, TargetOutsideLoadingRangeException{
+        Transporter transporter = new Transporter(0, 0);
+        transporter.raise();
+        Volvo240 volvo = new Volvo240(0, 0);
+        transporter.loadCar(volvo);
+        transporter.unloadCar();
+        assertEquals(volvo.getY(), 10, 0.0000);
+
+    }
+
+    @Test
+    public void should_not_be_able_to_raise_if_moving(){
+        Transporter transporter = new Transporter(0, 0);
+        transporter.gas(1);
+        assertEquals(!transporter.canMoveBed(), false);
+    }
+
+    @Test public void car_stored_should_move_with_transporter() throws LoadingToFullStorageException, RampNotExtendedException, TargetOutsideLoadingRangeException{
+        Transporter transporter = new Transporter(0, 0);
+        transporter.raise();
+        Volvo240 volvo = new Volvo240(0, 0);
+        transporter.loadCar(volvo);
+        transporter.lower();
+        transporter.gas(1);
+        transporter.move();
+        assertEquals(transporter.getY(), volvo.getY(), 0.000);
+    }
 }

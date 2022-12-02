@@ -4,7 +4,7 @@ import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
 import main.misc.DPoint;
 
-public abstract class CarStorage implements HasCarStorage, Positionable{
+public abstract class CarStorage implements HasCarStorage, Positionable { 
     
     private Positionable owner;
     private int loadRange;
@@ -12,7 +12,7 @@ public abstract class CarStorage implements HasCarStorage, Positionable{
     private int loadedCount;
     private Car[] loadedCars;
 
-    public CarStorage(int capacity, int range, Positionable owner){
+    public CarStorage(int capacity, int range, Positionable owner) {
         this.capacity = capacity;
         this.loadRange = range;
         this.owner = owner;
@@ -31,7 +31,7 @@ public abstract class CarStorage implements HasCarStorage, Positionable{
 
     public Car unloadCar() throws UnloadingFromEmptyStorageException {
         if (isEmpty()) throw new UnloadingFromEmptyStorageException();
-        Car car = loadedCars[loadedCount--];
+        Car car = loadedCars[--loadedCount];
         car.setX(owner.getX());
         car.setY(owner.getY() + loadRange);
         return car;
@@ -55,5 +55,9 @@ public abstract class CarStorage implements HasCarStorage, Positionable{
 
     public double getY(){
         return owner.getY();
+    }
+
+    public int getLoadedCount() {
+        return loadedCount;
     }
 }

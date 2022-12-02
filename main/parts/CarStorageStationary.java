@@ -3,7 +3,7 @@ package main.parts;
 import main.cars.Car;
 import main.interfaces.Positionable;
 
-public class CarStorageStationary extends CarStorage{
+public class CarStorageStationary extends CarStorage {
     
     private Positionable owner;
     private int loadRange;
@@ -14,6 +14,11 @@ public class CarStorageStationary extends CarStorage{
         super(capacity, loadRange, owner);
     }
 
+    /**
+     * Unloads the last loaded car
+     * @param index
+     * @return Car
+     */
     public Car unloadCar(int index){
         Car car = loadedCars[index];
         car.setX(owner.getX());
