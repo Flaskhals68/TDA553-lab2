@@ -79,4 +79,8 @@ public class TransportBed implements BaseBed {
             car.setY(owner.getY());
         }
     }
+
+    public int getLoadCount() {
+        return getLoadCount();
+    }
 }

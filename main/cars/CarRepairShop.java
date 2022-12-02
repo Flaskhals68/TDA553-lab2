@@ -12,10 +12,16 @@ public class CarRepairShop implements Positionable, CanStoreCars {
     private int capacity;
     private Point2D.Double point;
 
+<<<<<<< Updated upstream
     public CarRepairShop(Point2D.Double point, int capacity) {
         this.point = point;
         this.capacity = capacity;
         loadedCars = new Car[this.capacity];
+=======
+    public CarRepairShop(double x, double y, int capacity) {
+        this.point = new DPoint(x, y);
+        this.carStorage = new CarStorageStationary(capacity, loadRange, this);
+>>>>>>> Stashed changes
     }
 
     public double getX() {
@@ -39,7 +45,15 @@ public class CarRepairShop implements Positionable, CanStoreCars {
         return car;
     }
 
+<<<<<<< Updated upstream
     public Point2D.Double getPoint(){
+=======
+    public Car unloadCar(int index) throws UnloadingFromEmptyBedException {
+        return carStorage.unloadCar(index);
+    }
+
+    public DPoint getPoint() {
+>>>>>>> Stashed changes
         return point;
     }
 
@@ -47,4 +61,7 @@ public class CarRepairShop implements Positionable, CanStoreCars {
         return this.point.distance(other.getPoint());
     }
 
+    public int getLoadCount() {
+        return carStorage.getLoadCount();
+    }
 }
