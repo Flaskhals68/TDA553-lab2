@@ -32,11 +32,11 @@ public class Transporter extends Car implements HasBed, HasCarStorage {
         }
     }
 
-    public void loadCar(Car car) throws TransportBed.LoadingToFullBedException, TransportBed.RampNotExtendedException, TargetOutsideLoadingRangeException {
+    public void loadCar(Car car) throws TransportBed.LoadingToFullStorageException, TransportBed.RampNotExtendedException, TargetOutsideLoadingRangeException {
         bed.loadCar(car);
     }
 
-    public Car unloadCar() throws TransportBed.UnloadingFromEmptyBedException, TransportBed.RampNotExtendedException{
+    public Car unloadCar() throws TransportBed.UnloadingFromEmptyStorageException, TransportBed.RampNotExtendedException{
         return bed.unloadCar();
     }
 

@@ -3,21 +3,21 @@ package main.interfaces;
 import main.cars.Car;
 
 public interface HasCarStorage {
-    void loadCar(Car car) throws LoadingToFullBedException, TargetOutsideLoadingRangeException, RampNotExtendedException;
-    Car unloadCar() throws UnloadingFromEmptyBedException, RampNotExtendedException;
+    void loadCar(Car car) throws LoadingToFullStorageException, TargetOutsideLoadingRangeException, RampNotExtendedException;
+    Car unloadCar() throws UnloadingFromEmptyStorageException, RampNotExtendedException;
 
-    public class LoadingToFullBedException extends Exception {
+    public class LoadingToFullStorageException extends Exception {
         public static final String message = "";
 
-        public LoadingToFullBedException() {
+        public LoadingToFullStorageException() {
             super(message);
         }
     }
 
-    public class UnloadingFromEmptyBedException extends Exception {
+    public class UnloadingFromEmptyStorageException extends Exception {
         public static final String message = "";
 
-        public UnloadingFromEmptyBedException() {
+        public UnloadingFromEmptyStorageException() {
             super(message);
         }
     }
