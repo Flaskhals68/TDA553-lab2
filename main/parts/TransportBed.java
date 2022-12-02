@@ -34,10 +34,10 @@ public class TransportBed implements BaseBed, Positionable, HasCarStorage{
      * Load car if load capacity is not exceeded
      * @param car
      * @throws TargetOutsideLoadingRangeException
-     * @throws LoadingToFullBedException
+     * @throws LoadingToFullStorageException
      * @throws RampNotExtendedException
      */
-    public void loadCar(Car car) throws LoadingToFullBedException, RampNotExtendedException, TargetOutsideLoadingRangeException {
+    public void loadCar(Car car) throws LoadingToFullStorageException, RampNotExtendedException, TargetOutsideLoadingRangeException {
         if (!getBedExtended()) throw new RampNotExtendedException();
         //else if (!canLoad()) throw new LoadingToFullBedException();
         //else if (!inLoadRange(car)) throw new TargetOutsideLoadingRangeException();
@@ -46,7 +46,7 @@ public class TransportBed implements BaseBed, Positionable, HasCarStorage{
         carStorage.loadCar(car);
     }
 
-    public Car unloadCar() throws UnloadingFromEmptyBedException, RampNotExtendedException{
+    public Car unloadCar() throws UnloadingFromEmptyStorageException, RampNotExtendedException{
         if (!getBedExtended()) throw new RampNotExtendedException();
         //if (isEmpty()) throw new UnloadingFromEmptyBedException();
         //loadedCount--;

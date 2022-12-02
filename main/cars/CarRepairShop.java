@@ -23,11 +23,11 @@ public class CarRepairShop implements Positionable, HasCarStorage {
         return point.y;
     }
 
-    public void loadCar(Car car) throws LoadingToFullBedException, TargetOutsideLoadingRangeException{
+    public void loadCar(Car car) throws LoadingToFullStorageException, TargetOutsideLoadingRangeException{
         carStorage.loadCar(car);
     }
 
-    public Car unloadCar() throws UnloadingFromEmptyBedException{
+    public Car unloadCar() throws UnloadingFromEmptyStorageException{
         return carStorage.unloadCar();
     }
 
