@@ -5,6 +5,7 @@ import main.interfaces.Positionable;
 
 public class CarStorageStationary extends CarStorage{
     
+    private int loadRange;
     private int loadedCount;
     private Car[] loadedCars;
 
@@ -14,6 +15,8 @@ public class CarStorageStationary extends CarStorage{
 
     public Car unloadCar(int index){
         Car car = loadedCars[index];
+        car.setX(owner.getX());
+        car.setY(owner.getY() + loadRange);
         --loadedCount;
         return car;
     }
