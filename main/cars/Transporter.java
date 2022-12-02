@@ -45,4 +45,8 @@ public class Transporter extends Car implements HasBed, HasCarStorage {
         super.move();
         bed.moveLoaded();
     }
+
+    public int getLoadedCount() {
+        return bed.getLoadedCount();
+    }
 }

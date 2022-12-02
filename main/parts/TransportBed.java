@@ -74,4 +74,8 @@ public class TransportBed implements BaseBed, Positionable, HasCarStorage{
     public void moveLoaded() {
         carStorage.moveLoaded();
     }
+
+    public int getLoadedCount() {
+        return carStorage.getLoadedCount();
+    }
 }

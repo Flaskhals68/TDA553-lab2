@@ -3,7 +3,7 @@ package main.parts;
 import main.cars.Car;
 import main.interfaces.Positionable;
 
-public class CarStorageStationary extends CarStorage{
+public class CarStorageStationary extends CarStorage {
     
     private int loadedCount;
     private Car[] loadedCars;

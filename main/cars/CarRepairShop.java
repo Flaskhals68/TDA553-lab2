@@ -43,4 +43,7 @@ public class CarRepairShop implements Positionable, HasCarStorage {
         return this.point.distance(other.getPoint());
     }
 
+    public int getLoadedCount() {
+        return carStorage.getLoadedCount();
+    }
 }

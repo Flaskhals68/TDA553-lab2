@@ -5,6 +5,7 @@ import main.cars.Car;
 public interface HasCarStorage {
     void loadCar(Car car) throws LoadingToFullStorageException, TargetOutsideLoadingRangeException, RampNotExtendedException;
     Car unloadCar() throws UnloadingFromEmptyStorageException, RampNotExtendedException;
+    int getLoadedCount();
 
     public class LoadingToFullStorageException extends Exception {
         public static final String message = "";

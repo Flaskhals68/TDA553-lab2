@@ -17,4 +17,8 @@ public class CarStorageMobile extends CarStorage{
             car.setPoint(owner.getPoint());
         }
     }
+
+    public int getLoadedCount() {
+        return loadedCars.length;
+    }
 }
