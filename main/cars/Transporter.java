@@ -17,7 +17,7 @@ public class Transporter extends Car implements HasBed, HasCarStorage {
     }
 
     public boolean canMoveBed() {
-        return !bed.getBedExtended();
+        return getCurrentSpeed() == 0;
     }
 
     public void raise() {
@@ -38,6 +38,13 @@ public class Transporter extends Car implements HasBed, HasCarStorage {
 
     public Car unloadCar() throws TransportBed.UnloadingFromEmptyStorageException, TransportBed.RampNotExtendedException{
         return bed.unloadCar();
+    }
+
+    @Override
+    public void gas(double amount){
+        if(!canMoveBed()){
+            super.gas(amount);
+        }
     }
 
     @Override

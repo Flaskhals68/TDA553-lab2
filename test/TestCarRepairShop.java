@@ -50,8 +50,10 @@ public class TestCarRepairShop {
     @Test
     public void should_not_load_car_out_of_range() throws LoadingToFullStorageException, TargetOutsideLoadingRangeException {
         CarRepairShop shop = new CarRepairShop(0, 0, 1);
-        shop.loadCar(new Volvo240(20, 20));
-        assertThrows(null, null);
+        assertThrows(TargetOutsideLoadingRangeException.class, 
+        () -> {
+            shop.loadCar(new Volvo240(20, 20));
+        });
     }
 
 }
