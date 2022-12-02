@@ -27,12 +27,15 @@ public abstract class CarStorage implements HasCarStorage, Positionable{
     public void loadCar(Car car) throws LoadingToFullBedException, TargetOutsideLoadingRangeException {
         if (loadedCount >= capacity) throw new LoadingToFullBedException();
         else if (!inLoadingRange(car)) throw new TargetOutsideLoadingRangeException();
-        loadedCars[++loadedCount] = car;
+        loadedCars[loadedCount++] = car;
+        // if(loadedCount < capacity){
+        //     loadedCount++;
+        // }
     }
 
     public Car unloadCar() throws UnloadingFromEmptyBedException {
         if (isEmpty()) throw new UnloadingFromEmptyBedException();
-        Car car = loadedCars[--loadedCount];
+        Car car = loadedCars[loadedCount--];
         car.setX(owner.getX());
         car.setY(owner.getY() + loadRange);
         return car;
