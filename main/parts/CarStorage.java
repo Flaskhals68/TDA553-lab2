@@ -32,7 +32,7 @@ public abstract class CarStorage implements HasCarStorage, Positionable{
 
     public Car unloadCar() throws UnloadingFromEmptyStorageException {
         if (isEmpty()) throw new UnloadingFromEmptyStorageException();
-        Car car = loadedCars[--loadedCount];
+        Car car = loadedCars[loadedCount--];
         car.setX(owner.getX());
         car.setY(owner.getY() + loadRange);
         return car;
