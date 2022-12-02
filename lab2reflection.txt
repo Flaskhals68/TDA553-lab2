@@ -15,17 +15,26 @@ The method only accepts values in the range 0 <= x <= 1.
 All cars use the break method in the same way and all follow the contract to the fullest. Should a value outside said range,
 an exception will be thrown.
 
-Because the contract is formulated that the cars should move only if they are allowed to, the Liskov Principle is followed even though we might get a different
-outcome when switching a Volvo for a Scania (the Scania might stay put if the bed is raised).
+Because the contract is formulated that the cars should move only if they are allowed to, the Liskov Principle is followed even though we
+ might get a different outcome when switching a Volvo for a Scania (the Scania might stay put if the bed is raised).
 
 2. 
-For the duplication between the Scania and the Car Transporter we created a superclass BaseBed, which holds a method for checking if a bed is allowed to move
-and also the two abstract methods raise and lower. We created an interface HasBed for the sake of subtype polymorphism.
+For the duplication between the Scania and the Car Transporter we created a superclass BaseBed, which holds a method for checking if
+the bed is allowed to move and also the two abstract methods raise and lower as they both have different behaviour. We created an 
+interface HasBed for the sake of subtype polymorphism between all cars with a bed.
 
 To avoid code duplication for the transport and repair shop we chose do delegate the load and unload functionality to a CarStorage object.
 Both classes also implemnt the interface HasCarStorage to allow subtype polymorphism. 
 
+Using delegation made it possible to create new or switch out the cars' components in the future. This resulted in a much more 
+modular design than in lab1.
+
 
 3. 
+We decided to redo most of the design from lab1 to make it easier to extend the program. We switched to a more component based design rather
+than strictly using inheritance. This allowed us to easily give the cars different behaviours by giving them different types of engines and adding
+new components.
 
-
+The old design we used relied exclusively on inheritance. Using only a single layer of inheritance made it impossible to introduce
+a new car with for example both turbo and trim without duplicate code. Every new car made had to re-implement all shared code with other
+subclasses. With the new structure such a car can be created by simply giving it a trimmed body component and a turbo engine component.
