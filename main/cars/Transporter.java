@@ -5,7 +5,6 @@ import java.awt.geom.Point2D;
 
 import main.interfaces.HasBed;
 import main.interfaces.HasCarStorage;
-import main.interfaces.Positionable;
 import main.parts.NormalBody;
 import main.parts.NormalEngine;
 import main.parts.TransportBed;

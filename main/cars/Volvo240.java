@@ -5,7 +5,6 @@ import main.parts.*;
 
 public class Volvo240 extends Car {
 
-    private final static double trimFactor = 1.25;
     private final static int enginePower = 100;
 
     public Volvo240(Point2D.Double point) {
