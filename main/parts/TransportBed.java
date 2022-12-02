@@ -5,7 +5,7 @@ import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
 import main.misc.DPoint;
 
-public class TransportBed implements BaseBed, Positionable, HasCarStorage{
+public class TransportBed extends BaseBed implements Positionable, HasCarStorage{
     
     private boolean bedExtended = false;
     private static final int loadCapacity = 9;
@@ -14,8 +14,8 @@ public class TransportBed implements BaseBed, Positionable, HasCarStorage{
     private CarStorageMobile carStorage;
     
     public TransportBed(Car owner) {
-        this.owner = owner;
-        this.carStorage = new CarStorageMobile(loadCapacity, loadRange, this);
+        super(owner);
+        this.carStorage = new CarStorageMobile(loadCapacity, loadRange, owner);
     }
 
     public void raise() {

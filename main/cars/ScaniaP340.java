@@ -14,7 +14,7 @@ public class ScaniaP340 extends Car implements HasBed {
 
     public ScaniaP340(double x, double y) {
         super(x, y, enginePower, nrDoors, Color.black, "ScaniaP340", new NormalEngine(enginePower), new NormalBody());
-        this.bed = new DumpTruckBed();
+        this.bed = new DumpTruckBed(this);
     }
 
     public void raise() {

@@ -1,13 +1,17 @@
 package main.parts;
 
-public class DumpTruckBed implements BaseBed {
+import main.cars.Car;
+
+public class DumpTruckBed extends BaseBed {
     
     private static final int maxAngle = 70;
     private static final int minAngle = 0;
     private static final int angleSpeed = 10;
+    private Car owner;
     private int angle;
     
-    public DumpTruckBed() {
+    public DumpTruckBed(Car owner) {
+        super(owner);
         this.angle = minAngle;
     }
 

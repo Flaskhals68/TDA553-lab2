@@ -1,42 +1,31 @@
-Noah Andreasson, Erik Berglind, Kalle Johansson
+1.
 
-1. Explain how you chose the inheritance hierarchy in Task 1, making reference to the Open-Closed Principle.
+The contract for gas()
+If the car is allowed to move, increase the current speed of said car. The method only accepts positive doubles in the 
+range 0 <= x <= 1.
 
-We chose to create an abstract class Car to contain all the base attributes and functionality of a car, 
-such as the number of doors. We then created the subclasses Volvo240 and Saab95 to contain the specifics
-of each model and override the methods for the incrementing of the car's speed (for example). 
+The implementations of gas() in both volvo and scania both follow the contract. The behaviours of the two implementations are slightly different, 
+giving different speeds and having different conditions. Currently the car has no conditions which would stop it from moving, 
+while the scania cannot move if its bed is raised. 
 
-The Car class also implements an interface Movable, because a car may not be the only thing that can move.
-Movable contains the base signature of the required movement methods.
+The contract for brake()
+Lower the car's speed according to a paramether. The speed can not go below 0, nor can a negative value be used to increase the speed.
+The method only accepts values in the range 0 <= x <= 1.
 
-By using abstract methods in the Car class, we require all subclasses to implement their own gas(), break(), etc. to minimize dependency 
-between the client and each subclass. This makes it easier to add another car without changing the original code, 
-according to the open closed principle.
+All cars use the break method in the same way and all follow the contract to the fullest. Should a value outside said range,
+an exception will be thrown.
 
-The same goes for the implementation of the interface movable.
+Because the contract is formulated that the cars should move only if they are allowed to, the Liskov Principle is followed even though we might get a different
+outcome when switching a Volvo for a Scania (the Scania might stay put if the bed is raised).
 
+2. 
+For the duplication between the Scania and the Car Transporter we created a superclass BaseBed, which holds a method for checking if a bed is allowed to move
+and also the two abstract methods raise and lower. We created an interface HasBed for the sake of subtype polymorphism.
 
-2. Explain how you implemented each of the sanity checks in Task 4.
-
-For gas() and break(), we chose to throw an Exception when a value outside the range of 0 < x < 1 was given.
-This solves the problem of being able to pass too large arguments, and also makes it impossible for gas() to result
-in a lower speed, and break() to resolve in a higher speed.
-
-The only method to directly change the car's speed is increment speed. By using the min() method, the car 
-will always choose the lowest of either the next speed increment and the cars enginePower. This means that 
-it is impossible for the car to ever go over the cars enginePower.
-
-The only method that reduced the car's speed is decrementSpeed(). By using the max() method the largest of the next speed decrement 
-and 0 is chosen. This makes it impossible for currentSpeed to get a negative value.
+To avoid code duplication for the transport and repair shop we chose do delegate the load and unload functionality to a CarStorage object.
+Both classes also implemnt the interface HasCarStorage to allow subtype polymorphism. 
 
 
-####Aside####
+3. 
 
-In some test methods, we chose to use multiple asserts. While this may not be the preferred way to test methods,
-it avoids having to write multiple nearly identical tests. For example, volvo_should_move_to_positive_coordinates() would have
-to be spitted into multiple turn tests. Each turn test would have to make multiple turns to be able to make the untested turn.
-In other words, each test method would have to repeat the previous test method.
-The end result would be an unnecessarily long test class that is bloated with a lot of methods that test nearly the exact same things.
 
-By instead limiting each method to only test a single functionality the tests keep their independency from each other
-and are still highly manageable for future work.
