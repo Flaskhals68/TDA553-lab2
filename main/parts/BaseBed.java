@@ -1,8 +1,9 @@
 package main.parts;
 
 import main.cars.Car;
+import main.interfaces.HasBed;
 
-public abstract class BaseBed {
+public abstract class BaseBed implements HasBed{
 
     private Car owner;
 
