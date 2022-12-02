@@ -46,14 +46,14 @@ public class TestScaniaP340 {
     }
 
     @Test
-    public void cant_lower_below_zero(){
+    public void cant_lower_below_0_degrees(){
         ScaniaP340 scania = new ScaniaP340(0, 0);
         scania.lower();
         assertEquals(0, scania.getAngle());
     }
     
     @Test
-    public void cant_raise_above_seventy(){
+    public void cant_raise_above_70_degrees(){
         ScaniaP340 scania = new ScaniaP340(0, 0);
         for (int i = 0; i <= 10; i++){
             scania.raise();
