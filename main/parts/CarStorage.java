@@ -1,5 +1,4 @@
 package main.parts;
-import java.awt.geom.Point2D;
 import main.cars.Car;
 import main.interfaces.HasCarStorage;
 import main.interfaces.Positionable;
