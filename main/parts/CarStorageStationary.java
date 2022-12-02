@@ -14,7 +14,7 @@ public class CarStorageStationary extends CarStorage {
 
     public Car unloadCar(int index){
         Car car = loadedCars[index];
-        --loadedCount;
+        loadedCount--;
         return car;
     }
 }

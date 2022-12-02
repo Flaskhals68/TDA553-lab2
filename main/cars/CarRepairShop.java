@@ -10,8 +10,8 @@ public class CarRepairShop implements Positionable, HasCarStorage {
     private DPoint point;
     private CarStorageStationary carStorage;
 
-    public CarRepairShop(DPoint point, int capacity) {
-        this.point = point;
+    public CarRepairShop(double x, double y, int capacity) {
+        this.point = new DPoint(x, y);
         this.carStorage = new CarStorageStationary(capacity, loadRange, this);
     }
 
