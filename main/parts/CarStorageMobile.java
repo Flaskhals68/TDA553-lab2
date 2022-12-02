@@ -5,9 +5,6 @@ import main.interfaces.Positionable;
 
 public class CarStorageMobile extends CarStorage{
     
-    private int capacity;
-    private int loadRange;
-    private int loadedCount;
     private Positionable owner;
     private Car[] loadedCars;
 
