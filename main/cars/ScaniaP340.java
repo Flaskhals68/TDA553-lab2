@@ -50,4 +50,11 @@ public class ScaniaP340 extends Car implements HasBed {
             super.move();
         }
     }
+
+    @Override
+    public void startEngine() {
+        if (bed.getAngle() == 0) {
+            super.startEngine();
+        }
+    }
 }
