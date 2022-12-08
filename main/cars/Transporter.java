@@ -33,10 +33,12 @@ public class Transporter extends Car implements HasBed, HasCarStorage {
     }
 
     public void loadCar(Car car) throws TransportBed.LoadingToFullStorageException, TransportBed.RampNotExtendedException, TargetOutsideLoadingRangeException {
-        bed.loadCar(car);
+        if (getCurrentSpeed() == 0) {
+            bed.loadCar(car);
+        }
     }
 
-    public Car unloadCar() throws TransportBed.UnloadingFromEmptyStorageException, TransportBed.RampNotExtendedException{
+    public Car unloadCar() throws TransportBed.UnloadingFromEmptyStorageException, TransportBed.RampNotExtendedException {
         return bed.unloadCar();
     }
 
@@ -49,8 +51,10 @@ public class Transporter extends Car implements HasBed, HasCarStorage {
 
     @Override
     public void move() {
-        super.move();
-        bed.moveLoaded();
+        if (!bed.canMoveBed()) {
+            super.move();
+            bed.moveLoaded();
+        }
     }
 
     public int getLoadedCount() {
