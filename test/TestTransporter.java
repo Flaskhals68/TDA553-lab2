@@ -107,4 +107,12 @@ public class TestTransporter {
         transporter.move();
         assertEquals(transporter.getY(), volvo.getY(), 0.000);
     }
+
+    @Test
+    public void should_stay_still_when_bed_is_extended() {
+        Transporter transporter = new Transporter(0, 0);
+        transporter.raise();
+        transporter.startEngine();
+        assertEquals(0, transporter.getCurrentSpeed(), 0.0001);
+    }
 }

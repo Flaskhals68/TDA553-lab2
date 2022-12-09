@@ -58,6 +58,13 @@ public class TestScaniaP340 {
         for (int i = 0; i <= 10; i++){
             scania.raise();
         }
+    }
 
+    @Test
+    public void should_stay_still_when_bed_is_extended() {
+        ScaniaP340 scania = new ScaniaP340(0, 0);
+        scania.raise();
+        scania.startEngine();
+        assertEquals(0, scania.getCurrentSpeed(), 0.001);
     }
 }
